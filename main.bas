@@ -7,6 +7,7 @@ dim x as integer
 
 	dim cc as CbaseClass
 	cc.rollchar()
+	Print "class: ";cc.CharacterClass ; " level: "; cc.Level
  print "Strength      : "; cc.Strength ();"  Adjustment: "; cc.StrAdjustment () 
  print "Intellegence  : ";cc.Intellegence ();"  Adjustment: ";   cc.IntAdjustment ()
  print "wisdom        : ";cc.Wisdom ();"  Adjustment: ";  cc.WisAdjustment () 
@@ -46,7 +47,7 @@ select case cc.CharacterClass()
         cc.attacks(dhattack() ) 
  End Select	
 
-for  x = 20 to -20 step -1
+for  x = -20 to 20 step 1
  print "ac :";x;"=";cc.Tohitac(x),
 Next x
  print
@@ -73,19 +74,20 @@ if cc.CharacterClass() = Theif then
 end if 
 
 if cc.characterclass() = cleric then
-	print "Skeleton"; cc.Skeleton () 
-	print "Zombie"; cc.Zombie () 
-	print "Ghoul"; cc.Ghoul () 
-	print "wight"; cc.Wight () 
-	print "wraith"; cc.Wraith () 
-	print "mummy"; cc.Mummy () 
-	print "Spectre"; cc.Spectre () 
-	print "Vampire"; cc.Vampire () 
-	print "Phantom"; cc.Phantom () 
-	print "Haunt"; cc.Haunt () 
-	print "Spirit"; cc.Spirit () 
-	print "Nightshade"; cc.Nightshade ()
-	print "lich"; cc.Lich () 
+	print "Skeleton"; cc.Skeleton () ,
+	print "Zombie"; cc.Zombie (), 
+	print "Ghoul"; cc.Ghoul (), 
+	print "wight"; cc.Wight (), 
+	print "wraith"; cc.Wraith (), 
+	print "mummy"; cc.Mummy (), 
+	print "Spectre"; cc.Spectre (), 
+	print "Vampire"; cc.Vampire (), 
+	print "Phantom"; cc.Phantom (), 
+	print "Haunt"; cc.Haunt (), 
+	print "Spirit"; cc.Spirit (), 
+	print "Nightshade"; cc.Nightshade (),
+	print "lich"; cc.Lich (), 
 	print "special"; cc.Special () 
+	print
 end if
 	sleep

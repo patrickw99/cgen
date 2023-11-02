@@ -342,12 +342,12 @@ dim  dwarfXP (22) As Integer= {0, 2200, 4400, 8800, 17000, 35000, 70000, 140000,
 dim  halfingXP (18) As Integer= {0, 2000, 4000, 8000, 16000, 32000, 64000, 120000, 300000, 600000, 900000, 1200000, 1500000, 1800000, 2100000, 2400000, 2700000, 3000000}
 '*/*=*=*=*=*=*=*=*=*=*=*=*=*=***********************************************************************
 
-/' race, base hight, hroll, hsides, base weight male,  base weight female, wroll, wsides 
+ race, base hight, hroll, hsides, base weight male,  base weight female, wroll, wsides 
 dim hightWeight (4,8) as integer ={{1, 56, 2, 10, 110, 100, 2, 4},_ 'human
 				  {5, 54, 2, 10, 100,  90, 1, 4},_ 'elf
 				  {6, 44, 2,  4, 115, 105, 2, 6},_ 'dwarf
 				  {7, 31, 2,  4,  35,  30, 1, 1}}  'halfling
-'/
+
 ' race 
 #define Human 	 1
  ' abilities

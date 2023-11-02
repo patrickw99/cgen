@@ -1,744 +1,778 @@
-#INCLUDE "cgen.bi"
-#INCLUDE "dice.bi"
-#INCLUDE "tables.bi"
+#Include "cgen.bi"
+#Include "dice.bi"
+#Include "tables.bi"
 
 
 'public function
 
 
-SUB Cbaseclass.rollchar()
-charclear
-ChooseSex
-abilities
-chooseEye
-chooseHair
-chooseSkin
-cClass = chooseclass()
-SELECT CASE cClass
-CASE Fighter, Cleric, Mage, Theif
-HumanHeight
-CASE Elf
-elfHeight
-CASE Dwarf
-dwarfheight
-CASE Halfling
-halflingheight
-END SELECT
-feetinch
-PRINT "Class: ";cclass
-clevel = rollDice(1, 36)
-clalignment
+Sub Cbaseclass.rollchar()
+	charclear
+	ChooseSex
+	abilities
+	chooseEye
+	chooseHair
+	chooseSkin
+	cClass = chooseclass()
+	Select Case cClass
+		Case Fighter, Cleric, Mage, Theif
+			HumanHeight
+		Case Elf
+			elfHeight
+		Case Dwarf
+			dwarfheight
+		Case Halfling
+			halflingheight
+	End Select
+	feetinch
+	Print "Class: ";cclass
+	clevel = rollDice(1, 36)
+	clalignment
 
-END SUB
+End Sub
 ' ****************************Abilities************************
-PROPERTY cbaseclass.Strength () AS INTEGER
-RETURN cAbility(1)
-END PROPERTY
-PROPERTY cbaseclass.Intellegence () AS INTEGER
-RETURN cAbility(2)
-END PROPERTY
-PROPERTY cbaseclass.Wisdom () AS INTEGER
-RETURN cAbility(3)
-END PROPERTY
-PROPERTY cbaseclass.Dexterity () AS INTEGER
-RETURN cAbility(4)
-END PROPERTY
-PROPERTY cbaseclass.Constitution () AS INTEGER
-RETURN cAbility(5)
-END PROPERTY
-PROPERTY cbaseclass.Charisma () AS INTEGER
-RETURN cAbility(6)
-END PROPERTY
+Property cbaseclass.Strength () As Integer
+Return cAbility(1)
+End Property
+Property cbaseclass.Intellegence () As Integer
+Return cAbility(2)
+End Property
+Property cbaseclass.Wisdom () As Integer
+Return cAbility(3)
+End Property
+Property cbaseclass.Dexterity () As Integer
+Return cAbility(4)
+End Property
+Property cbaseclass.Constitution () As Integer
+Return cAbility(5)
+End Property
+Property cbaseclass.Charisma () As Integer
+Return cAbility(6)
+End Property
 
 ' *************************Ability Adjustments********************
-PROPERTY cbaseclass.StrAdjustment () AS INTEGER
-RETURN cadjust(1)
-END PROPERTY
-PROPERTY cbaseclass.IntAdjustment () AS INTEGER
-RETURN cadjust(2)
-END PROPERTY
-PROPERTY cbaseclass.WisAdjustment () AS INTEGER
-RETURN cadjust(3)
-END PROPERTY
-PROPERTY cbaseclass.DexAdjustment () AS INTEGER
-RETURN cadjust(4)
-END PROPERTY
-PROPERTY cbaseclass.ConAdjustment () AS INTEGER
-RETURN cadjust(5)
-END PROPERTY
-PROPERTY cbaseclass.CharAdjustment () AS INTEGER
-RETURN cadjust(6)
-END PROPERTY
+Property cbaseclass.StrAdjustment () As Integer
+Return cadjust(1)
+End Property
+Property cbaseclass.IntAdjustment () As Integer
+Return cadjust(2)
+End Property
+Property cbaseclass.WisAdjustment () As Integer
+Return cadjust(3)
+End Property
+Property cbaseclass.DexAdjustment () As Integer
+Return cadjust(4)
+End Property
+Property cbaseclass.ConAdjustment () As Integer
+Return cadjust(5)
+End Property
+Property cbaseclass.CharAdjustment () As Integer
+Return cadjust(6)
+End Property
 ' ******************character attributes. '
-PROPERTY  cbaseclass.AC() AS INTEGER
-RETURN cAC
-END PROPERTY
-PROPERTY cbaseclass. HitPoint() AS INTEGER
-RETURN cHitPoint
-END PROPERTY
-PROPERTY  cbaseclass.Damage() AS INTEGER
-RETURN cDamage
-END PROPERTY
-PROPERTY cbaseclass.MoveNor() AS INTEGER
-RETURN cMoveNor
-END PROPERTY
-PROPERTY  cbaseclass. MoveEnc() AS INTEGER
-RETURN cMoveEnc
-END PROPERTY
-PROPERTY  cbaseclass.MoveRun() AS INTEGER
-RETURN cMoveRun
-END PROPERTY
-PROPERTY  cbaseclass.MoveOther() AS INTEGER
-RETURN cMoveOther
-END PROPERTY
-PROPERTY  cbaseclass.Race AS STRING 'done
-RETURN cRace
-END PROPERTY
-PROPERTY  cbaseclass.Sex  AS STRING ' done
-IF csex =1 THEN
-RETURN "Male"
-ELSE
-RETURN "Female"
-ENDIF
+Property  cbaseclass.AC() As Integer
+Return cAC
+End Property
+Property cbaseclass. HitPoint() As Integer
+Return cHitPoint
+End Property
+Property  cbaseclass.Damage() As Integer
+Return cDamage
+End Property
+Property cbaseclass.MoveNor() As Integer
+Return cMoveNor
+End Property
+Property  cbaseclass. MoveEnc() As Integer
+Return cMoveEnc
+End Property
+Property  cbaseclass.MoveRun() As Integer
+Return cMoveRun
+End Property
+Property  cbaseclass.MoveOther() As Integer
+Return cMoveOther
+End Property
+Property  cbaseclass.Race As integer 'done
+Return cRace
+End Property
+Property  cbaseclass.Sex  As String ' done
+If csex =1 Then
+	Return "Male"
+Else
+	Return "Female"
+EndIf
 ' return cSex
-END PROPERTY
-PROPERTY  cbaseclass.Height  AS INTEGER
-RETURN cHeight
-END PROPERTY
+End Property
+Property  cbaseclass.Height  As Integer
+Return cHeight
+End Property
 
-PROPERTY cbaseclass.feet() AS INTEGER 'done
-RETURN chHight.foot
-END PROPERTY
-PROPERTY cbaseclass.inch() AS INTEGER 'done
-RETURN chHight.inch
-END PROPERTY
-PROPERTY  cbaseclass.Weight  AS INTEGER 'done
-RETURN cWeight
-END PROPERTY
-PROPERTY  cbaseclass.Age  AS INTEGER ' done
-RETURN cAge
-END PROPERTY
-PROPERTY  cbaseclass.Hair AS STRING 'done
-RETURN cHair
-END PROPERTY
-PROPERTY cbaseclass.skin() AS STRING
-RETURN cSkin
-END PROPERTY
-PROPERTY  cbaseclass.Eyes   AS STRING
-RETURN cEyes
-END PROPERTY
-PROPERTY  cbaseclass.FullName  AS STRING
-RETURN cFullName
-END PROPERTY
-PROPERTY  cbaseclass.alignment () AS INTEGER
-RETURN cAlignment
-END PROPERTY
-PROPERTY  cbaseclass.CharacterClass AS INTEGER
-RETURN cClass
-END PROPERTY
-PROPERTY  cbaseclass.CharacterClass(aclass AS INTEGER)
+Property cbaseclass.feet() As Integer 'done
+Return chHight.foot
+End Property
+Property cbaseclass.inch() As Integer 'done
+Return chHight.inch
+End Property
+Property  cbaseclass.Weight  As Integer 'done
+Return cWeight
+End Property
+Property  cbaseclass.Age  As Integer ' done
+Return cAge
+End Property
+Property  cbaseclass.Hair As String 'done
+Return cHair
+End Property
+Property cbaseclass.skin() As String
+Return cSkin
+End Property
+Property  cbaseclass.Eyes   As String
+Return cEyes
+End Property
+Property  cbaseclass.FullName  As String
+Return cFullName
+End Property
+Property  cbaseclass.alignment () As Integer
+Return cAlignment
+End Property
+Property  cbaseclass.CharacterClass As Integer
+Return cClass
+End Property
+Property  cbaseclass.CharacterClass(aclass As Integer)
 cClass=aclass
-END PROPERTY
+End Property
 
-PROPERTY  cbaseclass.Level AS INTEGER
+Property  cbaseclass.Level As Integer
 
-RETURN cLevel
-END PROPERTY
-PROPERTY cbaseclass.level(lvl AS INTEGER)
+Return cLevel
+End Property
+Property cbaseclass.level(lvl As Integer)
 clevel = lvl
-END PROPERTY
-PROPERTY  cbaseclass.Tohitac (armorclass AS INTEGER) AS INTEGER
-RETURN    cattack ((armorclass) + 20 )
+End Property
+Property  cbaseclass.Tohitac (armorclass As Integer) As Integer
+Return    cattack ((armorclass) + 20 )
 
-END PROPERTY
+End Property
 ' *******************************Theif Skills*****************'
-PROPERTY cbaseclass.OpenLocks() AS INTEGER
-RETURN ctskill (1)
-END PROPERTY
-PROPERTY cbaseclass.FindTraps() AS INTEGER
-RETURN ctskill (2)
-END PROPERTY
-PROPERTY cbaseclass.RemoveTraps() AS INTEGER
-RETURN ctskill (3)
-END PROPERTY
-PROPERTY cbaseclass.ClimbWalls() AS INTEGER
-RETURN ctskill (4)
-END PROPERTY
-PROPERTY cbaseclass.MoveSilently() AS INTEGER
-RETURN ctskill (5)
-END PROPERTY
-PROPERTY cbaseclass.HideinShadows() AS INTEGER
-RETURN ctskill (6)
-END PROPERTY
-PROPERTY cbaseclass.PickPockets() AS INTEGER
-RETURN ctskill (7)
-END PROPERTY
-PROPERTY cbaseclass.HearNoise() AS INTEGER
-RETURN ctskill (8)
-END PROPERTY
+Property cbaseclass.OpenLocks() As Integer
+Return ctskill (1)
+End Property
+Property cbaseclass.FindTraps() As Integer
+Return ctskill (2)
+End Property
+Property cbaseclass.RemoveTraps() As Integer
+Return ctskill (3)
+End Property
+Property cbaseclass.ClimbWalls() As Integer
+Return ctskill (4)
+End Property
+Property cbaseclass.MoveSilently() As Integer
+Return ctskill (5)
+End Property
+Property cbaseclass.HideinShadows() As Integer
+Return ctskill (6)
+End Property
+Property cbaseclass.PickPockets() As Integer
+Return ctskill (7)
+End Property
+Property cbaseclass.HearNoise() As Integer
+Return ctskill (8)
+End Property
 ' *******************saving throws ***********************'
 
-PROPERTY cbaseclass.DeathRayPoison () AS INTEGER
-RETURN csaves(0)
-END PROPERTY
-PROPERTY cbaseclass.MagicWands () AS INTEGER
-RETURN csaves(1)
-END PROPERTY
-PROPERTY cbaseclass.ParalysisStone () AS INTEGER
-RETURN csaves(2)
-END PROPERTY
-PROPERTY cbaseclass.BreathAttack () AS INTEGER
-RETURN csaves(3)
-END PROPERTY
-PROPERTY cbaseclass.RodStaffSpell () AS INTEGER
-RETURN csaves(4)
-END PROPERTY
+Property cbaseclass.DeathRayPoison () As Integer
+Return csaves(0)
+End Property
+Property cbaseclass.MagicWands () As Integer
+Return csaves(1)
+End Property
+Property cbaseclass.ParalysisStone () As Integer
+Return csaves(2)
+End Property
+Property cbaseclass.BreathAttack () As Integer
+Return csaves(3)
+End Property
+Property cbaseclass.RodStaffSpell () As Integer
+Return csaves(4)
+End Property
 
-PROPERTY cbaseclass.DeathRayPoison (value AS INTEGER)
+Property cbaseclass.DeathRayPoison (value As Integer)
 csaves(0) = value
-END PROPERTY
-PROPERTY cbaseclass.MagicWands (value AS INTEGER)
+End Property
+Property cbaseclass.MagicWands (value As Integer)
 csaves(1) = value
-END PROPERTY
-PROPERTY cbaseclass.ParalysisStone (value AS INTEGER)
+End Property
+Property cbaseclass.ParalysisStone (value As Integer)
 csaves(2) = value
-END PROPERTY
-PROPERTY cbaseclass.BreathAttack (value AS INTEGER)
+End Property
+Property cbaseclass.BreathAttack (value As Integer)
 csaves(3) = value
-END PROPERTY
-PROPERTY cbaseclass.RodStaffSpell (value AS INTEGER)
+End Property
+Property cbaseclass.RodStaffSpell (value As Integer)
 csaves(4) = value
-END PROPERTY
+End Property
 ' ****************cleric/druid turns****************************'
-PROPERTY cbaseclass.Skeleton () AS INTEGER
-RETURN cturns(0)
-END PROPERTY
-PROPERTY cbaseclass.Zombie () AS INTEGER
-RETURN cturns(1)
-END PROPERTY
-PROPERTY cbaseclass.Ghoul () AS INTEGER
-RETURN cturns(2)
-END PROPERTY
-PROPERTY cbaseclass.Wight () AS INTEGER
-RETURN cturns(3)
-END PROPERTY
-PROPERTY cbaseclass.Wraith () AS INTEGER
-RETURN cturns(4)
-END PROPERTY
-PROPERTY cbaseclass.Mummy () AS INTEGER
-RETURN cturns(5)
-END PROPERTY
-PROPERTY cbaseclass.Spectre () AS INTEGER
-RETURN cturns(6)
-END PROPERTY
-PROPERTY cbaseclass.Vampire () AS INTEGER
-RETURN cturns(7)
-END PROPERTY
-PROPERTY cbaseclass.Phantom () AS INTEGER
-RETURN cturns(8)
-END PROPERTY
-PROPERTY cbaseclass.Haunt () AS INTEGER
-RETURN cturns(9)
-END PROPERTY
-PROPERTY cbaseclass.Spirit () AS INTEGER
-RETURN cturns(10)
-END PROPERTY
-PROPERTY cbaseclass.Nightshade () AS INTEGER
-RETURN cturns(11)
-END PROPERTY
-PROPERTY cbaseclass.Lich () AS INTEGER
-RETURN cturns(12)
-END PROPERTY
-PROPERTY cbaseclass.Special () AS INTEGER
-RETURN cturns(13)
-END PROPERTY
+Property cbaseclass.Skeleton () As Integer
+Return cturns(0)
+End Property
+Property cbaseclass.Zombie () As Integer
+Return cturns(1)
+End Property
+Property cbaseclass.Ghoul () As Integer
+Return cturns(2)
+End Property
+Property cbaseclass.Wight () As Integer
+Return cturns(3)
+End Property
+Property cbaseclass.Wraith () As Integer
+Return cturns(4)
+End Property
+Property cbaseclass.Mummy () As Integer
+Return cturns(5)
+End Property
+Property cbaseclass.Spectre () As Integer
+Return cturns(6)
+End Property
+Property cbaseclass.Vampire () As Integer
+Return cturns(7)
+End Property
+Property cbaseclass.Phantom () As Integer
+Return cturns(8)
+End Property
+Property cbaseclass.Haunt () As Integer
+Return cturns(9)
+End Property
+Property cbaseclass.Spirit () As Integer
+Return cturns(10)
+End Property
+Property cbaseclass.Nightshade () As Integer
+Return cturns(11)
+End Property
+Property cbaseclass.Lich () As Integer
+Return cturns(12)
+End Property
+Property cbaseclass.Special () As Integer
+Return cturns(13)
+End Property
 
-PROPERTY cbaseclass.cspell(lvl AS INTEGER) AS INTEGER' lvl is between 0 and 7'
-IF lvl >= LBOUND(ccspell) AND lvl <=  UBOUND(ccspell) THEN
-RETURN ccspell(lvl)
-END IF
-END PROPERTY
+Property cbaseclass.cspell(lvl As Integer) As Integer' lvl is between 0 and 7'
+If lvl >= LBound(ccspell) And lvl <=  UBound(ccspell) Then
+	Return ccspell(lvl)
+End If
+End Property
 
-PROPERTY cbaseclass.espell(lvl AS INTEGER) AS INTEGER ' lvl is between 0 and 7'
-IF lvl >= LBOUND(cespell) AND lvl <=  UBOUND(cespell) THEN
-RETURN cespell(lvl)
-END IF
-END PROPERTY
-PROPERTY cbaseclass.mspell(lvl AS INTEGER) AS INTEGER ' lvl is between 0 and 7'
-IF lvl >= LBOUND(cmspell) AND lvl <=  UBOUND(cmspell) THEN
-RETURN cmspell(lvl)
-END IF
-END PROPERTY
+Property cbaseclass.espell(lvl As Integer) As Integer ' lvl is between 0 and 7'
+If lvl >= LBound(cespell) And lvl <=  UBound(cespell) Then
+	Return cespell(lvl)
+End If
+End Property
+Property cbaseclass.mspell(lvl As Integer) As Integer ' lvl is between 0 and 7'
+If lvl >= LBound(cmspell) And lvl <=  UBound(cmspell) Then
+	Return cmspell(lvl)
+End If
+End Property
 
 'Private functions and sub's
-SUB cbaseclass.charclear() ' done
-DIM x AS INTEGER
-DIM y AS INTEGER
-FOR x = 0 TO 5
-cAbility(x) = 0
-cadjust(x)  = 0
-NEXT x
+Sub cbaseclass.charclear() ' done
+	Dim x As Integer
+	Dim y As Integer
+	For x = 0 To 5
+		cAbility(x) = 0
+		cadjust(x)  = 0
+	Next x
 
-cprebonus = 0
-cRace  = ""
-cSex = 0
-cHeight   = 0
-cWeight = 0
-cAge = 0
-cHair  = ""
-cEyes  = ""
-cFullName = ""
-cAlignment = 0
+	cprebonus = 0
+	cRace  = 0
+	cSex = 0
+	cHeight   = 0
+	cWeight = 0
+	cAge = 0
+	cHair  = ""
+	cEyes  = ""
+	cFullName = ""
+	cAlignment = 0
 
-FOR x = 0 TO 40
-cattack (x) = 0
-NEXT x
+	For x = 0 To 40
+		cattack (x) = 0
+	Next x
 
-cXPAdj = 0
-cXPTotal = 0
-cPrimeReq = 0
-cAC = 0
-cHitPoint = 0
-cDamage = 0
+	cXPAdj = 0
+	cXPTotal = 0
+	cPrimeReq = 0
+	cAC = 0
+	cHitPoint = 0
+	cDamage = 0
 
-cMoveNor = 0
-cMoveEnc = 0
-cMoveRun = 0
-cMoveOther = 0
-FOR x = 0 TO 4
-cMoneyhome (x) = 0
-cMoneyelsewhere (x) = 0
-cMoneycarried (x) = 0
+	cMoveNor = 0
+	cMoveEnc = 0
+	cMoveRun = 0
+	cMoveOther = 0
+	For x = 0 To 4
+		cMoneyhome (x) = 0
+		cMoneyelsewhere (x) = 0
+		cMoneycarried (x) = 0
 
-NEXT x
-'for x = 0 to 8
-'for y = 0 to 8
-'	cspellbook(x,y) = ""
-'next y
-'next x
-cClass =0
-cLevel =0
-FOR x =0 TO 4
-csaves (x)=0
-NEXT x
-FOR x = 0 TO 13
-cturns (x) = 0
-NEXT x
-FOR x = 0 TO 8
-ccspell (x)=0
-NEXT x
-'for x = 0 to 10
-'	cmespell(x) = 0
-'next x
-FOR x = 0 TO 8
-ctskill (x)  = 0
-NEXT x
-END SUB
+	Next x
+	'for x = 0 to 8
+	'for y = 0 to 8
+	'	cspellbook(x,y) = ""
+	'next y
+	'next x
+	cClass =0
+	cLevel =0
+	For x =0 To 4
+		csaves (x)=0
+	Next x
+	For x = 0 To 13
+		cturns (x) = 0
+	Next x
+	For x = 0 To 8
+		ccspell (x)=0
+	Next x
+	'for x = 0 to 10
+	'	cmespell(x) = 0
+	'next x
+	For x = 0 To 8
+		ctskill (x)  = 0
+	Next x
+End Sub
 
-SUB  cbaseclass.ChooseSex() ' done
-CSex = RollDice(1,2)
+Sub  cbaseclass.ChooseSex() ' done
+	CSex = RollDice(1,2)
 
-END SUB
-SUB cbaseclass.dwarfheight () 'done
-cHeight = rnd_range (44 , 52)
-SELECT CASE cHeight
-CASE 44, 45
-IF CSex = Male THEN
-cWeight = rnd_range (1300,1399)
-ELSE
-cWeight = rnd_range (1250, 1349)
-END IF
-CASE 44, 45
-IF CSex = Male THEN
-cWeight = rnd_range (1400,1499)
-ELSE
-cWeight = rnd_range (1350, 1449)
-END IF
-CASE 44, 45
-IF CSex = Male THEN
-cWeight = rnd_range (1500,1549)
-ELSE
-cWeight = rnd_range (1450, 1549)
-END IF
-CASE 44, 45
-IF CSex = Male THEN
-cWeight = rnd_range (1550,1649)
-ELSE
-cWeight = rnd_range (1500, 1599)
-END IF
-CASE 44, 45
-IF CSex = Male THEN
-cWeight = rnd_range (1650,1750)
-ELSE
-cWeight = rnd_range (1600, 1700)
-END IF
-END SELECT
-END SUB
-SUB cbaseclass.HumanHeight () ' done
-cHeight = rnd_range(58, 76)
-SELECT CASE cHeight
-CASE 58, 59
-IF CSex = Male THEN
-cWeight = rnd_range (1100,1199)
-ELSE
-cWeight = rnd_range (1050, 1099)
-END IF
-CASE 60, 61
-IF CSex = Male THEN
-cWeight = rnd_range (1200,1299)
-ELSE
-cWeight = rnd_range (1100 , 1199)
-END IF
-CASE 62, 63
-IF CSex = Male THEN
-cWeight = rnd_range (1300,1399)
-ELSE
-cWeight = rnd_range (1200,1249)
-END IF
-CASE 64, 65
-IF CSex = Male THEN
-cWeight = rnd_range (1400,1499)
-ELSE
-cWeight = rnd_range (1250,1299)
-END IF
-CASE 66, 67
-IF CSex = Male THEN
-cWeight = rnd_range (1500,1549)
-ELSE
-cWeight = rnd_range (1300,1399)
-END IF
-CASE 68,69
-IF CSex = Male THEN
-cWeight = rnd_range (1550, 1649)
-ELSE
-cWeight = rnd_range ( 1400,1499)
-END IF
-CASE 70,71
-IF CSex = Male THEN
-cWeight = rnd_range (1650,1749)
-ELSE
-cWeight = rnd_range (1500,1549)
-END IF
-CASE 72, 73
-IF CSex = Male THEN
-cWeight = rnd_range (1750,1849)
-ELSE
-cWeight = rnd_range (1550,1649)
-END IF
-CASE 74,75
-IF CSex = Male THEN
-cWeight = rnd_range (1850,1999)
-ELSE
-cWeight = rnd_range (1650,1749)
-END IF
-CASE 76
-IF CSex = Male THEN
-cWeight = rnd_range ( 2000,2100)
-ELSE
-cWeight = rnd_range (1750,1850)
-END IF
-END SELECT
-END SUB
-SUB cbaseclass.ElfHeight ()' done
-cHeight = rnd_range(56, 68)
-SELECT CASE cheight
-CASE 56 , 57
-IF csex = Male THEN
-cWeight = rnd_range (900,999)
-ELSE
-cWeight = rnd_range (750, 799)
-END IF
-CASE 58, 59
-IF csex = Male THEN
-cWeight = rnd_range (1000,1099)
-ELSE
-cWeight = rnd_range (800 , 899)
-END IF
-CASE 60, 61
-IF csex = Male THEN
-cWeight = rnd_range (1100,1199)
-ELSE
-cWeight = rnd_range (900,999)
-END IF
-CASE 62, 63
-IF csex = Male THEN
-cWeight = rnd_range (1200,1299)
-ELSE
-cWeight = rnd_range (1000,1099)
-END IF
-CASE 64, 65
-IF csex = Male THEN
-cWeight = rnd_range (1300,1399)
-ELSE
-cWeight = rnd_range (1100,1199)
-END IF
-CASE  66,67
-IF csex = Male THEN
-cWeight = rnd_range (1400, 1499)
-ELSE
-cWeight = rnd_range (1200 ,1299)
-END IF
-CASE  68
-IF csex = Male THEN
-cWeight = rnd_range (1500, 1600)
-ELSE
-cWeight = rnd_range (1300 ,1400)
-END IF
-END SELECT
-END SUB
-SUB cbaseclass.halflingHeight() ' done
-cHeight = rnd_range(34, 38)
-SELECT CASE cHeight
-CASE 34, 35
-cWeight = rnd_range (580,599)
-CASE 36 , 37
-cWeight = rnd_range (600,619)
-CASE  38
-cWeight = rnd_range (620,630)
-END SELECT
+End Sub
+Sub cbaseclass.heightWeight(array() As Integer)
+	Dim As Integer dl, ul, count 
+	Dim As Integer hmod, wmod
+ 	dl =LBound(array)
+	ul = ubound (array)
+	
+	For count = dl To ul
+		
+		If  array(count,0) = crace Then 
+				Hmod = RollDice(array(count,2),array(count,3))
+				Wmod = RollDice(array(count,6),array(count,7))
+				 cheight = array(count,1) + Hmod
+				If Csex = male Then
+					cweight = array(count,4) + (Hmod * Wmod)
+				Else
+					cweight = array(count,5) + (Hmod * Wmod)
+				End If
+		End if
+		
+	Next 
+	
+	
+End Sub
 
-END SUB
+Sub cbaseclass.dwarfheight () 'done
+	cHeight = rnd_range (44 , 52)
+	Select Case cHeight
+		Case 44, 45
+			If CSex = Male Then
+				cWeight = rnd_range (1300,1399)
+			Else
+				cWeight = rnd_range (1250, 1349)
+			End If
+		Case 44, 45
+			If CSex = Male Then
+				cWeight = rnd_range (1400,1499)
+			Else
+				cWeight = rnd_range (1350, 1449)
+			End If
+		Case 44, 45
+			If CSex = Male Then
+				cWeight = rnd_range (1500,1549)
+			Else
+				cWeight = rnd_range (1450, 1549)
+			End If
+		Case 44, 45
+			If CSex = Male Then
+				cWeight = rnd_range (1550,1649)
+			Else
+				cWeight = rnd_range (1500, 1599)
+			End If
+		Case 44, 45
+			If CSex = Male Then
+				cWeight = rnd_range (1650,1750)
+			Else
+				cWeight = rnd_range (1600, 1700)
+			End If
+	End Select
+End Sub
+Sub cbaseclass.HumanHeight () ' done
+	cHeight = rnd_range(58, 76)
+	Select Case cHeight
+		Case 58, 59
+			If CSex = Male Then
+				cWeight = rnd_range (1100,1199)
+			Else
+				cWeight = rnd_range (1050, 1099)
+			End If
+		Case 60, 61
+			If CSex = Male Then
+				cWeight = rnd_range (1200,1299)
+			Else
+				cWeight = rnd_range (1100 , 1199)
+			End If
+		Case 62, 63
+			If CSex = Male Then
+				cWeight = rnd_range (1300,1399)
+			Else
+				cWeight = rnd_range (1200,1249)
+			End If
+		Case 64, 65
+			If CSex = Male Then
+				cWeight = rnd_range (1400,1499)
+			Else
+				cWeight = rnd_range (1250,1299)
+			End If
+		Case 66, 67
+			If CSex = Male Then
+				cWeight = rnd_range (1500,1549)
+			Else
+				cWeight = rnd_range (1300,1399)
+			End If
+		Case 68,69
+			If CSex = Male Then
+				cWeight = rnd_range (1550, 1649)
+			Else
+				cWeight = rnd_range ( 1400,1499)
+			End If
+		Case 70,71
+			If CSex = Male Then
+				cWeight = rnd_range (1650,1749)
+			Else
+				cWeight = rnd_range (1500,1549)
+			End If
+		Case 72, 73
+			If CSex = Male Then
+				cWeight = rnd_range (1750,1849)
+			Else
+				cWeight = rnd_range (1550,1649)
+			End If
+		Case 74,75
+			If CSex = Male Then
+				cWeight = rnd_range (1850,1999)
+			Else
+				cWeight = rnd_range (1650,1749)
+			End If
+		Case 76
+			If CSex = Male Then
+				cWeight = rnd_range ( 2000,2100)
+			Else
+				cWeight = rnd_range (1750,1850)
+			End If
+	End Select
+End Sub
+Sub cbaseclass.ElfHeight ()' done
+	cHeight = rnd_range(56, 68)
+	Select Case cheight
+		Case 56 , 57
+			If csex = Male Then
+				cWeight = rnd_range (900,999)
+			Else
+				cWeight = rnd_range (750, 799)
+			End If
+		Case 58, 59
+			If csex = Male Then
+				cWeight = rnd_range (1000,1099)
+			Else
+				cWeight = rnd_range (800 , 899)
+			End If
+		Case 60, 61
+			If csex = Male Then
+				cWeight = rnd_range (1100,1199)
+			Else
+				cWeight = rnd_range (900,999)
+			End If
+		Case 62, 63
+			If csex = Male Then
+				cWeight = rnd_range (1200,1299)
+			Else
+				cWeight = rnd_range (1000,1099)
+			End If
+		Case 64, 65
+			If csex = Male Then
+				cWeight = rnd_range (1300,1399)
+			Else
+				cWeight = rnd_range (1100,1199)
+			End If
+		Case  66,67
+			If csex = Male Then
+				cWeight = rnd_range (1400, 1499)
+			Else
+				cWeight = rnd_range (1200 ,1299)
+			End If
+		Case  68
+			If csex = Male Then
+				cWeight = rnd_range (1500, 1600)
+			Else
+				cWeight = rnd_range (1300 ,1400)
+			End If
+	End Select
+End Sub
+Sub cbaseclass.halflingHeight() ' done
+	cHeight = rnd_range(34, 38)
+	Select Case cHeight
+		Case 34, 35
+			cWeight = rnd_range (580,599)
+		Case 36 , 37
+			cWeight = rnd_range (600,619)
+		Case  38
+			cWeight = rnd_range (620,630)
+	End Select
 
-SUB cbaseclass.feetinch() 'done
-chHight.foot = floor(cHeight / 12)
-chHight.inch = cHeight - (chHight.foot *12)
-END SUB
+End Sub
 
-SUB cbaseclass.CharMovement(cMoveEncb AS INTEGER)
-SELECT CASE cMoveEncb
-CASE 0 TO 400
-cMoveNor = 120
-cMoveEnc = 40
-cMoveRun = 120
-CASE 401 TO 800
-cMoveNor = 90
-cMoveEnc = 30
-cMoveRun = 90
-CASE 801 TO 1200
-cMoveNor = 60
-cMoveEnc = 20
-cMoveRun = 60
-CASE 1201 TO 1600
-cMoveNor = 30
-cMoveEnc = 10
-cMoveRun = 30
-CASE 1601 TO 2400
-cMoveNor = 15
-cMoveEnc = 5
-cMoveRun = 15
-CASE IS >= 2401
-cMoveNor = 0
-cMoveEnc = 0
-cMoveRun = 0
-END SELECT
+Sub cbaseclass.feetinch() 'done
+	chHight.foot = floor(cHeight / 12)
+	chHight.inch = cHeight - (chHight.foot *12)
+End Sub
 
-END SUB
-SUB cbaseclass.chooseEye () 'done
-DIM  eye  AS INTEGER = rollDice(1, 100)
-SELECT CASE eye
-CASE 1 TO 16
-cEyes = "Amber"
-CASE 17 TO 36
-cEyes = "Brown"
-CASE 37 TO 52
-cEyes = "Hazel"
-CASE 53 TO 68
-cEyes = "Green"
-CASE 69 TO 84
-cEyes = "Blue"
-CASE 85 TO 100
-cEyes = "Gray"
-END SELECT
-END SUB
-SUB cbaseclass.chooseHair () 'done
-DIM  hairtype  AS INTEGER = rollDice(1, 100)
-SELECT CASE hairtype
-CASE 1 TO 12
-cHair = "Black"
-CASE 13 TO 20
-cHair = "Gray"
-CASE 21 TO 28
-cHair = "Platinum"
-CASE 29 TO 36
-cHair =  "White"
-CASE 37 TO 44
-cHair = "Dark Blonde"
-CASE 45 TO 52
-cHair = "Blonde"
-CASE 53 TO 60
-cHair = "Bleach Blonde"
-CASE 61 TO 68
-cHair =  "Dark Redhead"
-CASE 69 TO 76
-cHair =  "Redhead"
-CASE 77 TO 84
-cHair = "Light Redhead"
-CASE 85 TO 92
-cHair =  "Brunette"
-CASE 93 TO 100
-cHair = "Auburn"
-END SELECT
-END SUB
-SUB cbaseclass.chooseSkin () ' done
-DIM  skintype  AS INTEGER = rollDice(1, 100)
-SELECT CASE skintype
-CASE 1 TO 12
-cSkin= "Pale"
-CASE 13 TO 24
-cSkin= "Fair"
-CASE 25 TO 37
-cSkin= "Light"
-CASE 38 TO 50
-cSkin=  "Light Tan"
-CASE 51 TO 63
-cSkin= "Tan"
-CASE 64 TO 76
-cSkin= "Dark Tan"
-CASE 77 TO 88
-cSkin= "Brown"
-CASE 89 TO 100
-cSkin=  "Dark Brown"
-END SELECT
-END SUB
+Sub cbaseclass.CharMovement(cMoveEncb As Integer)
+	Select Case cMoveEncb
+		Case 0 To 400
+			cMoveNor = 120
+			cMoveEnc = 40
+			cMoveRun = 120
+		Case 401 To 800
+			cMoveNor = 90
+			cMoveEnc = 30
+			cMoveRun = 90
+		Case 801 To 1200
+			cMoveNor = 60
+			cMoveEnc = 20
+			cMoveRun = 60
+		Case 1201 To 1600
+			cMoveNor = 30
+			cMoveEnc = 10
+			cMoveRun = 30
+		Case 1601 To 2400
+			cMoveNor = 15
+			cMoveEnc = 5
+			cMoveRun = 15
+		Case Is >= 2401
+			cMoveNor = 0
+			cMoveEnc = 0
+			cMoveRun = 0
+	End Select
 
-FUNCTION cbaseclass.abilitiesadj (ability AS INTEGER ) AS INTEGER 'done
+End Sub
+Sub cbaseclass.chooseEye () 'done
+	Dim  eye  As Integer = rollDice(1, 100)
+	Select Case eye
+		Case 1 To 16
+			cEyes = "Amber"
+		Case 17 To 36
+			cEyes = "Brown"
+		Case 37 To 52
+			cEyes = "Hazel"
+		Case 53 To 68
+			cEyes = "Green"
+		Case 69 To 84
+			cEyes = "Blue"
+		Case 85 To 100
+			cEyes = "Gray"
+	End Select
+End Sub
+Sub cbaseclass.chooseHair () 'done
+	Dim  hairtype  As Integer = rollDice(1, 100)
+	Select Case hairtype
+		Case 1 To 12
+			cHair = "Black"
+		Case 13 To 20
+			cHair = "Gray"
+		Case 21 To 28
+			cHair = "Platinum"
+		Case 29 To 36
+			cHair =  "White"
+		Case 37 To 44
+			cHair = "Dark Blonde"
+		Case 45 To 52
+			cHair = "Blonde"
+		Case 53 To 60
+			cHair = "Bleach Blonde"
+		Case 61 To 68
+			cHair =  "Dark Redhead"
+		Case 69 To 76
+			cHair =  "Redhead"
+		Case 77 To 84
+			cHair = "Light Redhead"
+		Case 85 To 92
+			cHair =  "Brunette"
+		Case 93 To 100
+			cHair = "Auburn"
+	End Select
+End Sub
+Sub cbaseclass.chooseSkin () ' done
+	Dim  skintype  As Integer = rollDice(1, 100)
+	Select Case skintype
+		Case 1 To 12
+			cSkin= "Pale"
+		Case 13 To 24
+			cSkin= "Fair"
+		Case 25 To 37
+			cSkin= "Light"
+		Case 38 To 50
+			cSkin=  "Light Tan"
+		Case 51 To 63
+			cSkin= "Tan"
+		Case 64 To 76
+			cSkin= "Dark Tan"
+		Case 77 To 88
+			cSkin= "Brown"
+		Case 89 To 100
+			cSkin=  "Dark Brown"
+	End Select
+End Sub
 
-SELECT CASE ability
-CASE 3
-abilitiesadj = -3
-CASE 4TO 5
-abilitiesadj = -2
-CASE 6 TO 8
-abilitiesadj = -1
-CASE 9 TO 1
-abilitiesadj = 0
-CASE 13 TO 15
-abilitiesadj = 1
-CASE 16 TO 17
-abilitiesadj = 2
-CASE 18
-abilitiesadj = 3
-END SELECT
-END FUNCTION
-SUB cbaseclass.abilities() 'done
-DIM  i AS INTEGER
-FOR i = LBOUND(cAbility) TO UBOUND (cAbility)
-cAbility(i) = RollDice(3,6)
-NEXT
-FOR i = LBOUND(cadjust) TO UBOUND (cadjust)
-cadjust(i) = abilitiesadj(cability(i))
-NEXT
-END SUB
-FUNCTION cbaseclass.chooseclass() AS INTEGER 'done
-DIM ClassChoice(0 TO 8) AS INTEGER
-DIM count AS INTEGER =1
-DIM rclass AS INTEGER
-DIM ccount AS INTEGER  = -1
+Function cbaseclass.abilitiesadj (ability As Integer ) As Integer 'done
 
-DO
-IF cAbility(1) >= 9 THEN
-classChoice(count) = Fighter
-count += 1
-ccount=1
-ENDIF
+	Select Case ability
+		Case 3
+			abilitiesadj = -3
+		Case 4TO 5
+			abilitiesadj = -2
+		Case 6 To 8
+			abilitiesadj = -1
+		Case 9 To 1
+			abilitiesadj = 0
+		Case 13 To 15
+			abilitiesadj = 1
+		Case 16 To 17
+			abilitiesadj = 2
+		Case 18
+			abilitiesadj = 3
+	End Select
+End Function
+Sub cbaseclass.abilities() 'done
+	Dim  i As Integer
+	For i = LBound(cAbility) To UBound (cAbility)
+		cAbility(i) = RollDice(3,6)
+	Next
+	For i = LBound(cadjust) To UBound (cadjust)
+		cadjust(i) = abilitiesadj(cability(i))
+	Next
+End Sub
+Function cbaseclass.chooseclass() As Integer 'done
+	Dim ClassChoice(0 To 8) As Integer
+	Dim count As Integer =1
+	Dim rclass As Integer
+	Dim ccount As Integer  = -1
 
-IF cAbility(2) >= 9 THEN
-classChoice(count) = Mage
-count += 1
-ccount=1
-ENDIF
+	Do
+		If cAbility(1) >= 9 Then
+			classChoice(count) = Fighter
+			count += 1
+			ccount=1
+		EndIf
 
-IF cAbility(3) >= 9 THEN
-classChoice(count) = cleric
-count += 1
-ccount=1
-ENDIF
+		If cAbility(2) >= 9 Then
+			classChoice(count) = Mage
+			count += 1
+			ccount=1
+		EndIf
 
-IF cAbility(4) >= 9 THEN
-classChoice(count) = theif
-count += 1
-ccount=1
-ENDIF
+		If cAbility(3) >= 9 Then
+			classChoice(count) = cleric
+			count += 1
+			ccount=1
+		EndIf
 
-IF cAbility(1) >= 9 AND  cAbility(2) >= 9 THEN
-classChoice(count) = Elf
-count += 1
-ccount=1
-ENDIF
+		If cAbility(4) >= 9 Then
+			classChoice(count) = theif
+			count += 1
+			ccount=1
+		EndIf
 
-IF cAbility(1) >= 9 AND  cAbility(5) >= 9 THEN
-classChoice(count) =dwarf
-count += 1
-ccount=1
-ENDIF
+		If cAbility(1) >= 9 And  cAbility(2) >= 9 Then
+			classChoice(count) = Elf
+			count += 1
+			ccount=1
+		EndIf
 
-IF cAbility(1) >= 9 AND  cAbility(4) >= 9 AND cAbility(5) >= 9 THEN
-classChoice(count) = halfling
-count += 1
-ccount=1
-ENDIF
-IF ccount = -1 THEN
-abilities()
-ENDIF
-LOOP WHILE ccount = -1
-DO
-rclass = pick(ClassChoice())
-LOOP WHILE rclass = 0
-RETURN rclass
+		If cAbility(1) >= 9 And  cAbility(5) >= 9 Then
+			classChoice(count) =dwarf
+			count += 1
+			ccount=1
+		EndIf
+
+		If cAbility(1) >= 9 And  cAbility(4) >= 9 And cAbility(5) >= 9 Then
+			classChoice(count) = halfling
+			count += 1
+			ccount=1
+		EndIf
+		If ccount = -1 Then
+			abilities()
+		EndIf
+	Loop While ccount = -1
+	Do
+		rclass = pick(ClassChoice())
+		Select Case rclass
+			Case dwarf
+				crace=dwarf
+			Case elf
+				crace= elf
+			Case halfling
+				crace=halfling
+			Case Else 
+				crace=human
+		End Select
+	Loop While rclass = 0
+	Return rclass
 
 
-END FUNCTION
-SUB cbaseclass.savers(array() AS INTEGER) 'done
-DIM x AS INTEGER
-DIM y AS INTEGER
-FOR x = LBOUND(array) TO UBOUND (array)
-IF clevel >= array(x, 0) AND clevel <= array(x, 1) THEN
-FOR y = LBOUND (csaves) TO UBOUND(csaves)
-csaves(y) = array (x,y+2)
-NEXT
-END IF
-NEXT
-END SUB
-SUB cbaseclass.attacks(array() AS INTEGER) 'done
-DIM x AS INTEGER
-DIM y AS INTEGER
-FOR x = LBOUND (array) TO UBOUND (array)
-IF clevel >= array(x, 0) AND clevel <= array(x, 1) THEN
-FOR y = LBOUND (cattack) TO UBOUND (cattack)
-'print "array";x;",";y;"  ";array(x,y)
-cattack(y) = array (x,y+2)
-NEXT
-END IF
-NEXT
-END SUB
-SUB cbaseclass.theifskill(array() AS INTEGER) 'done
-DIM x AS INTEGER
-DIM y AS INTEGER
-FOR y = LBOUND (array,2) TO UBOUND (array, 2)
-ctskill(y) = array (clevel,y)
-NEXT
-END SUB
-SUB cbaseclass.clericturn (array() AS INTEGER)' done
-DIM x AS INTEGER
-DIM y AS INTEGER
-DIM lower AS INTEGER = LBOUND (array,2)
-DIM upper AS INTEGER = UBOUND (array, 2)
-SELECT CASE cClass
-CASE Cleric
-FOR y = lower TO upper
-cturns(y) = array (clevel,y)
-NEXT
-CASE Fighter
-IF cLevel >= 9 AND Wisdom  >= 13 THEN
-FOR y = lower TO upper
-cturns(y) = array (floor(cLevel/5),y)
-NEXT
-END IF
-END SELECT
-END SUB
+End Function
+Sub cbaseclass.savers(array() As Integer) 'done
+	Dim x As Integer
+	Dim y As Integer
+	For x = LBound(array) To UBound (array)
+		If clevel >= array(x, 0) And clevel <= array(x, 1) Then
+			For y = LBound (csaves) To UBound(csaves)
+				csaves(y) = array (x,y+2)
+			Next
+		End If
+	Next
+End Sub
+Sub cbaseclass.attacks(array() As Integer) 'done
+	Dim x As Integer
+	Dim y As Integer
+	For x = LBound (array) To UBound (array)
+		If clevel >= array(x, 0) And clevel <= array(x, 1) Then
+			For y = LBound (cattack) To UBound (cattack)
+				'print "array";x;",";y;"  ";array(x,y)
+				cattack(y) = array (x,y+2)
+			Next
+		End If
+	Next
+End Sub
+Sub cbaseclass.theifskill(array() As Integer) 'done
+	Dim x As Integer
+	Dim y As Integer
+	For y = LBound (array,2) To UBound (array, 2)
+		ctskill(y) = array (clevel,y)
+	Next
+End Sub
+Sub cbaseclass.clericturn (array() As Integer)' done
+	Dim x As Integer
+	Dim y As Integer
+	Dim lower As Integer = LBound (array,2)
+	Dim upper As Integer = UBound (array, 2)
+	Select Case cClass
+		Case Cleric
+			For y = lower To upper
+				cturns(y) = array (clevel,y)
+			Next
+		Case Fighter
+			If cLevel >= 9 And Wisdom  >= 13 Then
+				For y = lower To upper
+					cturns(y) = array (floor(cLevel/5),y)
+				Next
+			End If
+	End Select
+End Sub
 
-' spells: this populates the spell array.  based on class it will load 
-'the array with number of spells that can be cast in one day. 
+' spells: this populates the spell array.  based on class it will load
+'the array with number of spells that can be cast in one day.
 /'SUB cbaseclass.spells(array() AS INTEGER) 'done
 DIM x AS INTEGER
 DIM y AS INTEGER
@@ -764,19 +798,19 @@ IF ccspell(x) <> 0 THEN
 knuth_down (cspellchoice())
 spellnum = rnd_range(LBOUND (cspellchoice()), UBOUND (cspellchoice())
 FOR y = 0 TO spellnum
-                      
+
 cmspellbook(x,y)= mepellchoice(y)
 FOR z = 1 TO range
 ccdailyspells(z) =
-        
+
 NEXT
 NEXT
-NEXT	
- 
- 
- 
- 
- 
+NEXT
+
+
+
+
+
 CASE Elf
 IF  clevel <= 9 THEN
 FOR y = LBOUND (array,2) TO UBOUND (array, 2)
@@ -838,193 +872,193 @@ END SELECT
 END FUNCTION '/
 
 /'SUB cbaseclass.spellbook (x AS INTEGER, y AS INTEGER,  value AS STRING)
-  
+
 SELECT CASE cClass
 CASE Cleric
 cCspellbook(x,y) = value
 
 CASE Mage
-  
+
 CASE Elf
-  
+
 END SELECT
 
 END SUB '/
 /'FUNCTION cbaseclass.spellbook OVERLOAD ( x AS INTEGER, y AS INTEGER) AS STRING 'done
-   
+
 SELECT CASE cClass
 CASE Cleric
-  
+
 RETURN ccspellbook (x,y)
 CASE Mage
-  
+
 RETURN cmspellbook(x,y)
 CASE Elf
-  
+
 RETURN cespellbook(x,y)
 END SELECT
 
 END FUNCTION '/
 
-FUNCTION cbaseclass.moneyhome (cointype AS INTEGER)AS INTEGER
-SELECT CASE cointype
-CASE PLATINUM
-RETURN cMoneyhome(PLATINUM)
-CASE GOLD
-RETURN cMoneyhome(GOLD)
-CASE ELECTRUM
-RETURN cMoneyhome(ELECTRUM)
-CASE SILVER
-RETURN cMoneyhome(SILVER)
-CASE COPPER
-RETURN cMoneyhome(COPPER)
-END SELECT
+Function cbaseclass.moneyhome (cointype As Integer)As Integer
+	Select Case cointype
+		Case PLATINUM
+			Return cMoneyhome(PLATINUM)
+		Case GOLD
+			Return cMoneyhome(GOLD)
+		Case ELECTRUM
+			Return cMoneyhome(ELECTRUM)
+		Case SILVER
+			Return cMoneyhome(SILVER)
+		Case COPPER
+			Return cMoneyhome(COPPER)
+	End Select
 
-END FUNCTION
-FUNCTION cbaseclass.moneycarried(cointype AS INTEGER)AS INTEGER
-SELECT CASE cointype
-CASE PLATINUM
-RETURN cmoneycarried(PLATINUM)
-CASE GOLD
-RETURN cmoneycarried(GOLD)
-CASE ELECTRUM
-RETURN cmoneycarried(ELECTRUM)
-CASE SILVER
-RETURN cmoneycarried(SILVER)
-CASE COPPER
-RETURN cmoneycarried(COPPER)
-END SELECT
+End Function
+Function cbaseclass.moneycarried(cointype As Integer)As Integer
+	Select Case cointype
+		Case PLATINUM
+			Return cmoneycarried(PLATINUM)
+		Case GOLD
+			Return cmoneycarried(GOLD)
+		Case ELECTRUM
+			Return cmoneycarried(ELECTRUM)
+		Case SILVER
+			Return cmoneycarried(SILVER)
+		Case COPPER
+			Return cmoneycarried(COPPER)
+	End Select
 
-END FUNCTION
-FUNCTION cbaseclass.moneyelsewhere(cointype AS INTEGER) AS INTEGER
-SELECT CASE cointype
-CASE PLATINUM
-RETURN cMoneyelsewhere(PLATINUM)
-CASE GOLD
-RETURN cMoneyelsewhere(GOLD)
-CASE ELECTRUM
-RETURN cMoneyelsewhere(ELECTRUM)
-CASE SILVER
-RETURN cMoneyelsewhere(SILVER)
-CASE COPPER
-RETURN cMoneyelsewhere(COPPER)
-END SELECT
+End Function
+Function cbaseclass.moneyelsewhere(cointype As Integer) As Integer
+	Select Case cointype
+		Case PLATINUM
+			Return cMoneyelsewhere(PLATINUM)
+		Case GOLD
+			Return cMoneyelsewhere(GOLD)
+		Case ELECTRUM
+			Return cMoneyelsewhere(ELECTRUM)
+		Case SILVER
+			Return cMoneyelsewhere(SILVER)
+		Case COPPER
+			Return cMoneyelsewhere(COPPER)
+	End Select
 
-END FUNCTION
-SUB cbaseclass.moneyadd( place AS INTEGER, cointype AS INTEGER, amount AS INTEGER)
+End Function
+Sub cbaseclass.moneyadd( place As Integer, cointype As Integer, amount As Integer)
 
-SELECT CASE cointype
-CASE PLATINUM
-SELECT CASE place
-CASE home
-cMoneyhome(PLATINUM) =+ amount
-CASE Carried
-cMoneycarried(PLATINUM) =+ amount
-CASE elseware
-cMoneyelsewhere(PLATINUM)=+ amount
-END SELECT
-CASE GOLD
-SELECT CASE place
+	Select Case cointype
+		Case PLATINUM
+			Select Case place
+				Case home
+					cMoneyhome(PLATINUM) =+ amount
+				Case Carried
+					cMoneycarried(PLATINUM) =+ amount
+				Case elseware
+					cMoneyelsewhere(PLATINUM)=+ amount
+			End Select
+		Case GOLD
+			Select Case place
 
-CASE home
-cMoneyhome(GOLD) =+ amount
-CASE Carried
-cMoneycarried(GOLD) =+ amount
-CASE elseware
-cMoneyelsewhere(GOLD)=+ amount
+				Case home
+					cMoneyhome(GOLD) =+ amount
+				Case Carried
+					cMoneycarried(GOLD) =+ amount
+				Case elseware
+					cMoneyelsewhere(GOLD)=+ amount
 
-END SELECT
-CASE ELECTRUM
-SELECT CASE place
+			End Select
+		Case ELECTRUM
+			Select Case place
 
-CASE home
-cMoneyhome(ELECTRUM) =+ amount
-CASE Carried
-cMoneycarried(ELECTRUM) =+ amount
-CASE elseware
-cMoneyelsewhere(ELECTRUM)=+ amount
+				Case home
+					cMoneyhome(ELECTRUM) =+ amount
+				Case Carried
+					cMoneycarried(ELECTRUM) =+ amount
+				Case elseware
+					cMoneyelsewhere(ELECTRUM)=+ amount
 
-END SELECT
-CASE SILVER
-SELECT CASE place
-CASE home
-cMoneyhome(SILVER) =+ amount
-CASE Carried
-cMoneycarried(SILVER) =+ amount
-CASE elseware
-cMoneyelsewhere(SILVER)=+ amount
+			End Select
+		Case SILVER
+			Select Case place
+				Case home
+					cMoneyhome(SILVER) =+ amount
+				Case Carried
+					cMoneycarried(SILVER) =+ amount
+				Case elseware
+					cMoneyelsewhere(SILVER)=+ amount
 
-END SELECT
-CASE COPPER
-SELECT CASE place
-CASE home
-cMoneyhome(COPPER) =+ amount
-CASE Carried
-cMoneycarried(COPPER) =+ amount
-CASE elseware
-cMoneyelsewhere(COPPER)=+ amount
+			End Select
+		Case COPPER
+			Select Case place
+				Case home
+					cMoneyhome(COPPER) =+ amount
+				Case Carried
+					cMoneycarried(COPPER) =+ amount
+				Case elseware
+					cMoneyelsewhere(COPPER)=+ amount
 
-END SELECT
-END SELECT
+			End Select
+	End Select
 
 
-END SUB
-SUB cbaseclass.moneysub( place AS INTEGER, cointype AS INTEGER, amount AS INTEGER)
-SELECT CASE cointype
-CASE PLATINUM
-SELECT CASE place
-CASE home
-cMoneyhome(PLATINUM) =- amount
-CASE Carried
-cMoneycarried(PLATINUM) =- amount
-CASE elseware
-cMoneyelsewhere(PLATINUM)=- amount
-END SELECT
-CASE GOLD
-SELECT CASE place
+End Sub
+Sub cbaseclass.moneysub( place As Integer, cointype As Integer, amount As Integer)
+	Select Case cointype
+		Case PLATINUM
+			Select Case place
+				Case home
+					cMoneyhome(PLATINUM) =- amount
+				Case Carried
+					cMoneycarried(PLATINUM) =- amount
+				Case elseware
+					cMoneyelsewhere(PLATINUM)=- amount
+			End Select
+		Case GOLD
+			Select Case place
 
-CASE home
-cMoneyhome(GOLD) =- amount
-CASE Carried
-cMoneycarried(GOLD) =- amount
-CASE elseware
-cMoneyelsewhere(GOLD)=- amount
+				Case home
+					cMoneyhome(GOLD) =- amount
+				Case Carried
+					cMoneycarried(GOLD) =- amount
+				Case elseware
+					cMoneyelsewhere(GOLD)=- amount
 
-END SELECT
-CASE ELECTRUM
-SELECT CASE place
+			End Select
+		Case ELECTRUM
+			Select Case place
 
-CASE home
-cMoneyhome(ELECTRUM) =- amount
-CASE Carried
-cMoneycarried(ELECTRUM) =- amount
-CASE elseware
-cMoneyelsewhere(ELECTRUM)=- amount
+				Case home
+					cMoneyhome(ELECTRUM) =- amount
+				Case Carried
+					cMoneycarried(ELECTRUM) =- amount
+				Case elseware
+					cMoneyelsewhere(ELECTRUM)=- amount
 
-END SELECT
-CASE SILVER
-SELECT CASE place
-CASE home
-cMoneyhome(SILVER) =- amount
-CASE Carried
-cMoneycarried(SILVER) =- amount
-CASE elseware
-cMoneyelsewhere(SILVER)=- amount
+			End Select
+		Case SILVER
+			Select Case place
+				Case home
+					cMoneyhome(SILVER) =- amount
+				Case Carried
+					cMoneycarried(SILVER) =- amount
+				Case elseware
+					cMoneyelsewhere(SILVER)=- amount
 
-END SELECT
-CASE COPPER
-SELECT CASE place
-CASE home
-cMoneyhome(COPPER) =- amount
-CASE Carried
-cMoneycarried(COPPER) =- amount
-CASE elseware
-cMoneyelsewhere(COPPER)=+ amount
+			End Select
+		Case COPPER
+			Select Case place
+				Case home
+					cMoneyhome(COPPER) =- amount
+				Case Carried
+					cMoneycarried(COPPER) =- amount
+				Case elseware
+					cMoneyelsewhere(COPPER)=+ amount
 
-END SELECT
-END SELECT
-END SUB
-SUB cbaseclass.clalignment () 'done
-cAlignment =  rnd_range (1, 3)
-END SUB
+			End Select
+	End Select
+End Sub
+Sub cbaseclass.clalignment () 'done
+	cAlignment =  rnd_range (1, 3)
+End Sub
 

@@ -12,7 +12,8 @@ TYPE CbaseClass
 	DIM  cadjust(6) AS INTEGER
 	DIM  cprebonus  AS INTEGER
 
-	DIM  cRace AS STRING
+	DIM  cRace AS Integer
+	Dim  c_race As Integer
 	DIM  cSex  AS INTEGER
 	DIM  chHight AS charhight
 	DIM  cHeight  AS INTEGER
@@ -95,6 +96,7 @@ PUBLIC:
    Declare SUB attacks(array() AS INTEGER) 'done
 	DECLARE SUB theifskill(array() AS INTEGER)
 	DECLARE SUB clericturn (array() AS INTEGER)
+	Declare Sub heightWeight(array() As Integer)
 
 
 	DECLARE SUB rollchar()
@@ -111,7 +113,7 @@ PUBLIC:
 	DECLARE PROPERTY MoveEnc ()AS INTEGER
 	DECLARE PROPERTY MoveRun() AS INTEGER
 	DECLARE PROPERTY MoveOther() AS INTEGER
-	DECLARE PROPERTY Race() AS STRING
+	DECLARE PROPERTY Race() AS integer
 	DECLARE PROPERTY Sex()  AS string  'done
 	DECLARE PROPERTY Height()  AS INTEGER  'done
 	DECLARE PROPERTY feet() AS INTEGER 'done

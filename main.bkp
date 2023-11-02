@@ -1,0 +1,171 @@
+#include "cgen.bi"
+#include "dice.bi"
+#include "tables.bi"
+'driver / test
+
+	dim cc as CbaseClass
+	dim x as integer
+
+	dim count as integer
+	dim rclass as string
+	dim rsex as string
+	dim align as string
+
+	dim as integer y, z
+
+	for z = 1 to 7
+		cc.charclear
+		cc.CharacterClass = z
+		cc.level = rnd_range(1,36)
+		cc.ChooseSex
+		cc.abilities
+		cc.chooseEye
+		cc.chooseHair
+		cc.chooseSkin
+		cc.HumanHeight
+		cc.feetinch
+
+
+		select case z
+		case fighter
+			cc.HumanHeight
+			cc.savers(fightersaves())
+			cc.attacks(fighterattack())
+			cc.spells(clericspells())
+			for x = 0 to 7
+				print "   level (";x;")"; cc.cspell(x);
+			next
+
+			cc.clericturn(turns())
+			print 	" Skeleton: ";  cc.Skeleton;
+			print 	"  Zombie: ";  cc.Zombie;
+			print  " Ghoul: ";  cc.Ghoul;
+			print 	 " Wight: ";  cc.Wight
+			print 	 " Wraith: ";  cc.Wraith;
+			print 	 " Mummy: ";  cc.Mummy;
+			print 	 " Spectre: ";  cc.Spectre;
+			print 	 " Vampire: ";  cc.Vampire
+			print 	 " Phantom: ";  cc.Phantom;
+			print 	 " Haunt: ";  cc.Haunt;
+			print 	 " Spirit: ";  cc.Spirit;
+			print 	 " Nightshade: "; cc.Nightshade
+			print 	 " Lich: ";  cc.Lich;
+			print 	 " Special: ";  cc.Special
+			print
+		case cleric
+			cc.savers(clericsaves())
+			cc.attacks(ctdattack())
+			cc.HumanHeight
+			cc.spells(clericspells())
+
+			for x = 0 to 7
+				print "   level (";x;")"; cc.cspell(x);
+			next
+			print
+
+
+
+			for x = 0 to 6
+				print "level ";x;" spells"
+				for y= 0 to cc.cspell(x)-1
+					cc.spellbook ( x , y , clericspell(x,y))
+					print 	cc.spellbook(x, y);"  ";
+
+				next
+				print
+
+			next
+
+
+			cc.clericturn(turns())
+			print 	" Skeleton: ";  cc.Skeleton;
+			print 	"  Zombie: ";  cc.Zombie;
+			print  " Ghoul: ";  cc.Ghoul;
+			print 	 " Wight: ";  cc.Wight
+			print 	 " Wraith: ";  cc.Wraith;
+			print 	 " Mummy: ";  cc.Mummy;
+			print 	 " Spectre: ";  cc.Spectre;
+			print 	 " Vampire: ";  cc.Vampire
+			print 	 " Phantom: ";  cc.Phantom;
+			print 	 " Haunt: ";  cc.Haunt;
+			print 	 " Spirit: ";  cc.Spirit;
+			print 	 " Nightshade: "; cc.Nightshade
+			print 	 " Lich: ";  cc.Lich;
+			print 	 " Special: ";  cc.Special
+		case mage
+
+			cc.savers(magesaves())
+			cc.attacks(mageattack())
+			cc.HumanHeight
+			cc.spells(magespells())
+			for x = 0 to 8
+				print "   level (";x+1;")"; cc.mspell(x);
+			next
+			print
+			for x = 0 to  8
+			if cc.mspell(x) > 1 then
+				for y = 0 to 8
+				print  "   level (";x+1;")"; cc.spellbook(x, y);
+				next
+				print
+			endif
+		next
+
+		case theif
+
+			cc.savers(theifsaves())
+			cc.attacks(ctdattack())
+			cc.HumanHeight
+			cc.theifskill(theifskills() )
+			print "OpenLocks:";cc.OpenLocks;
+			print "  FindTraps: ";  cc.FindTraps;
+			print "  RemoveTraps: ";   cc.RemoveTraps;
+			print "  ClimbWalls: ";   cc.ClimbWalls;
+			print "  MoveSilently: "; cc.MoveSilently
+			print "  HideinShadows: ";  cc.HideinShadows;
+			print "  PickPockets: ";  cc.PickPockets;
+			print "  HearNoise: ";  cc.HearNoise
+
+		case elf
+			cc.ElfHeight
+			cc.savers(elfsaves ())
+			cc.attacks(dhattack())
+			cc.spells(elfspells())
+			for x = 0 to 8
+				print "   level (";x;")";cc.espell(x);
+			next
+		case dwarf
+			cc.savers(dwarfsaves())
+			cc.attacks(dhattack())
+			cc.dwarfheight
+
+		case halfling
+			cc.savers(halflingsaves())
+			cc.attacks(dhattack())
+			cc.halflingHeight
+		end select
+		print "class:  ";cc.CharacterClass, "level:  ";cc.level
+		print "sex: ";cc.Sex(),"Eye Color:  ";cc.Eyes(),"hair color: ";cc.Hair(),"skin color:  ";cc.skin(), "height: ";cc.height()
+		print  cc.feet();" Feet  ";cc.inch();"  inches","Weight: ";cc.Weight ()
+		print "Abilities:  ","STR: ";cc.Strength , "INT: ";cc.Intellegence   ,"Wis: ";cc.Wisdom ,"DEX: ";cc.Dexterity  ,"Con: ";cc.Constitution ,"Chr: ";cc.Charisma
+		print "Adjustment:  ","STR: ";cc.StrengthAdjustment , "INT: ";cc.IntellegenceAdjustment,"Wis: ";cc.WisdomAdjustment  ,"DEX: ";cc.DexterityAdjustment   ,"Con: ";cc.ConstitutionAdjustment  ,"Chr: ";cc.CharismaAdjustment
+
+'Saving throw test
+		print "DeathRayPoison: ";cc.DeathRayPoison;"    MagicWands: ";  cc.MagicWands;"    ParalysisStone: ";cc.ParalysisStone
+		print "BreathAttack: "; cc.BreathAttack;"    RodStaffSpell: "; cc.RodStaffSpell
+
+		'to hit AC test
+		print "ac {0}"; cc.Tohitac(0)
+		for x = 20 to 11  step -1
+			print "ac (";x;") ";cc.Tohitac(x); "   ac (";x-10;") " ;cc.Tohitac(x-10);"   ac (";x-21;") ";cc.Tohitac (x-21);"   ac (";x-31;") ";cc.Tohitac (x-31)
+		next
+		sleep
+		print
+		print
+
+	next
+
+
+
+
+	sleep

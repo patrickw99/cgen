@@ -1,0 +1,46 @@
+[Project]
+Version=3
+Description=cgen
+Api=fb (FreeBASIC)
+Grouping=1
+AddMainFiles=1
+AddModuleFiles=1
+ResExport=
+CompileIfNewer=0
+IncVersion=0
+RunCmd=0
+[Make]
+Module=Module Build,fbc -c -exx -g -s console
+Recompile=1
+Current=1
+1=Windows Console,fbc -s console -exx -g
+Output=
+Run=
+Delete=
+[TabOrder]
+TabOrder=1001,1002,1,2,3,4
+[File]
+1001=cgen.bas
+1002=dice.bas
+1003=
+1=cgen.bi
+2=dice.bi
+3=tables.bi
+Main=4
+4=main.bas
+[BreakPoint]
+1001=
+4=
+1003=
+1=
+1002=
+2=
+3=
+[FileInfo]
+1001=0,365,1,-1609219968,1430257800,16781323,0,0,0,0,0,0,0,0,0,0,0,0,0
+1002=0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1003=0,49,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1=0,14,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2=0,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3=0,349,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+4=0,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
